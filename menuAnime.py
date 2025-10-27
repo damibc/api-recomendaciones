@@ -1,12 +1,13 @@
 import utils
 from Animes import Anime
+from Users import User
 
-
-def menu():
+def menu(user):
+    
     opciones = {
-        1: lambda: recomendar_animes(),
-        2: lambda: valorar_anime(),
-        3: lambda: mostrar_animes(),
+        1: lambda: recomendar_animes(user),
+        2: lambda: valorar_anime(user),
+        3: lambda: mostrar_animes(user),
     }
     while True:
         opcion = utils.validar_numero(
@@ -28,5 +29,7 @@ def valorar_anime():
     print("Funcion en Costrucción")
 
 
-def mostrar_animes():
-    print("Funcion en Costrucción")
+def mostrar_animes(user):
+    animes = user.get_animes()
+    for anime in animes:
+        print(anime)

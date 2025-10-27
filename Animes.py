@@ -1,7 +1,8 @@
 class Anime():
-    def __init__(self, id = 0, nombre = "", generos = []):
+    def __init__(self, id = 0, nombre = "",puntuacion = -1, generos = []):
         self.__id = id
         self.__nombre = nombre
+        self.__puntuacion = puntuacion
         self.__generos = generos
 
 #Nombre
@@ -32,5 +33,5 @@ class Anime():
 
 #STR
     def __str__(self):
-        return f"Nombre: {self.__nombre} || Generos: {self.__generos}\n"
+        return f"Nombre: {self.__nombre} || Puntuacion: {self.__puntuacion} || Generos: {self.__generos}\n"
     
