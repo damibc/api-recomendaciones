@@ -1,0 +1,8 @@
+# Carpetas de cache
+__pycache__/
+*.pyc
+node_modules/
+*.log
+*.tmp
+.vscode/
+data/corr_matrix.csv

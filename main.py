@@ -2,6 +2,7 @@ import csv
 from pathlib import Path
 import utils
 import menuAnime
+import menuRecomendador
 from Animes import Anime
 from Users import User
 
@@ -84,6 +85,7 @@ def iniciar_sesion():
 def menu(user):
     opciones = {
         1: lambda: menuAnime.menu(user),
+        2: lambda: menuRecomendador.menu(),
         0: lambda: salir()
     }
 
@@ -91,6 +93,7 @@ def menu(user):
         opcion = utils.validar_numero(
             "Seleccione una Opcion:\n"\
             "   1.- Gestionar Animes.\n"\
+            "   2.- Gestionar Recomendador.\n"\
             "   0.- Salir.\n",
             0,len(opciones)-1)
         accion = opciones.get(opcion)
