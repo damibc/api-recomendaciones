@@ -8,34 +8,4 @@ userRatings = ratings.pivot_table(index='user_id',columns='anime_id',values='rat
 
 corrMatrix = userRatings.corr(method='pearson', min_periods=10)
 print(corrMatrix.head())
-corrMatrix.to_csv("data/corr_matrix.csv", index=False)
-
-# print(corrMatrix.shape)
-# mis_reviews = pd.DataFrame({
-#     'user_id': [999],  
-#     'anime_id': [1089],  
-#     'rating': [10]  
-# })
-
-# mis_reviews.to_csv('data/my_ratings.csv', index=False)
-# mis_ratings = pd.merge(ratings, mis_reviews[['anime_id', 'rating']])
-# myRatings = pd.Series(data=mis_ratings['rating'].values, index=mis_ratings['anime_id'])
-
-# simCandidates = pd.Series(dtype=float)
-
-# for anime, rating in myRatings.items():
-#     if anime not in corrMatrix.columns:
-#         continue  # ignora si el anime no está en la matriz
-#     sims = corrMatrix[anime].dropna()
-#     sims = sims.map(lambda x: x * rating)
-#     simCandidates = pd.concat([simCandidates, sims])
-
-# simCandidates = simCandidates.groupby(simCandidates.index).sum()
-# simCandidates = simCandidates.drop(myRatings.index, errors='ignore')
-# simCandidates = simCandidates.sort_values(ascending=False)
-    
-# simdf = simCandidates.reset_index()
-# simdf.columns = ['anime_id','score']
-# recomendaciones = pd.merge(simdf, animes, on='anime_id', how='left')
-# recomendaciones.sort_values('score', ascending=False, inplace=True)
-# print(recomendaciones[['name', 'score']].head(10))
+corrMatrix.to_csv("data/corr_matrix.csv", index=True)
