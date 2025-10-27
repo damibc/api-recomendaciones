@@ -1,11 +1,20 @@
 import pandas as pd
 
-a_col = ['anime_id', 'name','members']
-animes = pd.read_csv('data/anime.csv', sep=',', usecols=a_col)
+def generar_corr_matrix(ratings_path='data/ratings.csv', anime_path='data/anime.csv', output_path='data/corr_matrix.csv'):
+    try:
+        a_col = ['anime_id', 'name', 'members']
+        ratings = pd.read_csv(ratings_path, sep=',')
 
-ratings = pd.read_csv('data/ratings.csv', sep=',')
-userRatings = ratings.pivot_table(index='user_id',columns='anime_id',values='rating')
+        userRatings = ratings.pivot_table(index='user_id', columns='anime_id', values='rating')
 
-corrMatrix = userRatings.corr(method='pearson', min_periods=10)
-print(corrMatrix.head())
-corrMatrix.to_csv("data/corr_matrix.csv", index=True)
+        corrMatrix = userRatings.corr(method='pearson', min_periods=10)
+
+        corrMatrix.to_csv(output_path, index=True)
+        print(f"Matriz de correlación generada correctamente y guardada en '{output_path}' ✅")
+        print(corrMatrix.head())
+
+        return corrMatrix
+
+    except Exception as e:
+        print(f"❌ Error al generar la matriz de correlación: {e}")
+        return None
