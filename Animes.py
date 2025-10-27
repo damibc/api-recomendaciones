@@ -33,5 +33,11 @@ class Anime():
 
 #STR
     def __str__(self):
-        return f"Nombre: {self.__nombre} || Puntuacion: {self.__puntuacion} || Generos: {self.__generos}\n"
-    
+        texto = f"Nombre: {self.__nombre}"
+        if self.__puntuacion != -1:
+            texto += f" || Puntuacion: {self.__puntuacion}"
+        if self.__generos:
+            texto += f" || Generos: {self.__generos}"
+        return texto
+
+        

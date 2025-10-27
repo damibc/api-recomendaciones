@@ -28,7 +28,6 @@ def menu():
 
 # --- Ruta al archivo version.txt ---
 def obtener_ruta_version():
-    """Devuelve la ruta absoluta al archivo version.txt"""
     script_dir = Path(__file__).resolve().parent
     data_dir = script_dir / "data"
     version_file = data_dir / "version.txt"
@@ -36,7 +35,6 @@ def obtener_ruta_version():
 
 
 def leer_version():
-    """Lee la versión actual desde version.txt. Si no existe, devuelve 0."""
     version_file = obtener_ruta_version()
     try:
         with version_file.open("r", encoding="utf-8") as f:
@@ -49,7 +47,6 @@ def leer_version():
 
 
 def guardar_version(nueva_version):
-    """Guarda una nueva versión en version.txt"""
     version_file = obtener_ruta_version()
     with version_file.open("w", encoding="utf-8") as f:
         f.write(str(nueva_version))
@@ -57,13 +54,9 @@ def guardar_version(nueva_version):
 
 def entrenar_recomendador():
     print("\nEntrenando el recomendador... (simulación)")
-    # Aquí podrías poner el código real de entrenamiento más adelante.
-
-    # Leer versión actual y aumentarla
     version_actual = leer_version()
     nueva_version = version_actual + 1
     guardar_version(nueva_version)
-
     print(f"Entrenamiento completado. Nueva versión: {nueva_version}\n")
 
 

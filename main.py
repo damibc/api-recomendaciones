@@ -22,7 +22,7 @@ def iniciar_sesion():
     ruta_anime = data_dir / "anime.csv"
 
     # --- Leer ratings.csv ---
-    user_ratings = {}  # anime_id -> puntuación del usuario
+    user_ratings = {} 
     try:
         with ruta_ratings.open(newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
@@ -35,17 +35,17 @@ def iniciar_sesion():
                 except (KeyError, ValueError):
                     continue
     except FileNotFoundError:
-        print(f"❌ No se encontró el archivo: {ruta_ratings}")
+        print(f"No se encontró el archivo: {ruta_ratings}")
         salir()
     except Exception as e:
-        print(f"⚠️ Error al leer {ruta_ratings}: {e}")
+        print(f"Error al leer {ruta_ratings}: {e}")
         salir()
 
     if not user_ratings:
-        print("⚠️ Este usuario no tiene animes registrados.")
+        print("Este usuario no tiene animes registrados.")
         return User(user_id, [])
 
-    # --- Leer anime.csv y crear objetos Anime ---
+    # --- Leer anime.csv---
     user_animes = []
     try:
         with ruta_anime.open(newline="", encoding="utf-8") as f:
@@ -67,15 +67,15 @@ def iniciar_sesion():
                     anime = Anime(
                         id=anime_id,
                         nombre=row.get("name", "").strip(),
-                        puntuacion=user_ratings[anime_id],  # ✅ rating desde ratings.csv
+                        puntuacion=user_ratings[anime_id], 
                         generos=generos_list
                     )
                     user_animes.append(anime)
     except FileNotFoundError:
-        print(f"❌ No se encontró el archivo: {ruta_anime}")
+        print(f"No se encontró el archivo: {ruta_anime}")
         salir()
     except Exception as e:
-        print(f"⚠️ Error al leer {ruta_anime}: {e}")
+        print(f"Error al leer {ruta_anime}: {e}")
         salir()
 
     usuario = User(id=user_id, animes=user_animes)
