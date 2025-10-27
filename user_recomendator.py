@@ -34,4 +34,4 @@ def recomendar_animes(user_id, top_n=10):
     recomendaciones = pd.merge(simdf, animes, on='anime_id', how='left')
     recomendaciones.sort_values('score', ascending=False, inplace=True)
 
-    return recomendaciones[['anime_id', 'name', 'score']].head(top_n)
+    return recomendaciones[['anime_id', 'name', 'score']].head(top_n).to_dict(orient="records")

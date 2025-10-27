@@ -1,6 +1,6 @@
 import pandas as pd
 
-def generar_corr_matrix(ratings_path='data/ratings.csv', anime_path='data/anime.csv', output_path='data/corr_matrix.csv'):
+def entrenar(ratings_path='data/ratings.csv', anime_path='data/anime.csv', output_path='data/corr_matrix.csv'):
     try:
         a_col = ['anime_id', 'name', 'members']
         ratings = pd.read_csv(ratings_path, sep=',')
