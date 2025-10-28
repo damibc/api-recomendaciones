@@ -1,25 +1,22 @@
 from anime_recomendator import entrenar
 from user_recomendator import recomendar_animes
-from pathlib import Path
 
 class AnimeDAO:
     def __init__(self):
-        self.version_file = Path("data/version.txt")
+        self.version_file = "data/version.txt"
 
-    def get_version(self):
+    def get_version(self) -> str:
         try:
-            with self.version_file.open("r", encoding="utf-8") as f:
-                contenido = f.read().strip()
-                return int(contenido) if contenido.isdigit() else 0
+            with open(self.version_file, "r") as f:
+                version = f.read().strip()
+            return version
         except FileNotFoundError:
-            self.version_file.parent.mkdir(parents=True, exist_ok=True)
-            self.version_file.write_text("0", encoding="utf-8")
-            return 0
+            return "Versión no encontrada"
 
-    def train(self):
+    def train(self) -> str:
         entrenar()
+        return "Entrenamiento completado"
 
-
-    def get_recommendations(self, user_id):
+    def get_recommendations(self, user_id: int) -> list:
         recomendaciones = recomendar_animes(user_id)
         return recomendaciones
