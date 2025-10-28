@@ -2,6 +2,8 @@ from pathlib import Path
 import utils
 from Animes import Anime
 from Users import User
+from anime_api import train
+from anime_api import version
 
 
 def menu():
@@ -54,6 +56,7 @@ def guardar_version(nueva_version):
 
 def entrenar_recomendador():
     print("\nEntrenando el recomendador... (simulación)")
+    train()
     version_actual = leer_version()
     nueva_version = version_actual + 1
     guardar_version(nueva_version)
@@ -61,5 +64,6 @@ def entrenar_recomendador():
 
 
 def mostrar_version():
-    version_actual = leer_version()
-    print(f"\n Versión actual del recomendador: {version_actual}\n")
+    vers = version()
+    numero_version = vers.get("version", 0)
+    print(f"\n Versión actual del recomendador: {numero_version}\n")
