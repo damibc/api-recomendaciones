@@ -14,6 +14,6 @@ def train():
     return {"status": result}
 
 @app.get("/recommend/{user_id}")
-def recommend(user_id: int):
+def recommend(user_id):
     recomendaciones = dao.get_recommendations(user_id)
     return {"user_id": user_id, "recomendaciones": recomendaciones}

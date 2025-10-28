@@ -1,6 +1,9 @@
 import csv
 from pathlib import Path
 from Animes import Anime
+from anime_api import recommend
+from anime_api import train
+from anime_api import version
 import utils
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
@@ -27,9 +30,8 @@ def menu(user):
         accion = opciones.get(opcion)
         accion()
 
-def recomendar_animes():
-    print("Funcion en Costrucción")
-
+def recomendar_animes(user):
+    recommend(user.get_id())
 
 def valorar_anime(user):
     RATINGS_FILE = DATA_DIR / "ratings.csv"
