@@ -19,6 +19,13 @@ class Anime():
     def set_id(self, id):
         self.__id = id
 
+#Puntuacion
+    def get_puntuacion(self):
+        return self.__puntuacion
+    
+    def set_puntuacion(self, puntuacion):
+        self.__puntuacion = puntuacion
+
 #Genero
     def get_generos(self):
         return self.__generos
@@ -33,7 +40,7 @@ class Anime():
 
 #STR
     def __str__(self):
-        texto = f"Nombre: {self.__nombre}"
+        texto = f"ID: {self.__id} || Nombre: {self.__nombre}"
         if self.__puntuacion != -1:
             texto += f" || Puntuacion: {self.__puntuacion}"
         if self.__generos:

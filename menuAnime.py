@@ -32,7 +32,86 @@ def recomendar_animes():
 
 
 def valorar_anime(user):
-    print("Funcion en Costrucción")
+    RATINGS_FILE = DATA_DIR / "ratings.csv"
+
+    anime_id = utils.validar_numero("Introduzca el ID del anime que desea valorar:\n")
+
+    anime_info = None
+    try:
+        with ANIME_FILE.open(newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                if int(row["anime_id"]) == anime_id:
+                    generos = row["genre"].split(", ") if row["genre"] else []
+                    anime_info = Anime(
+                        id=anime_id,
+                        nombre=row["name"],
+                        generos=generos
+                    )
+                    break
+    except FileNotFoundError:
+        print(f"No se encontró el archivo {ANIME_FILE}")
+        return
+
+    if not anime_info:
+        print("El ID del anime no existe.")
+        return
+
+    nueva_puntuacion = utils.validar_numero("Introduzca su puntuación (0 a 10):\n", 0, 10)
+
+    animes_usuario = user.get_animes()
+    anime_existente = next((a for a in animes_usuario if a.get_id() == anime_id), None)
+
+    if anime_existente:
+        # Si ya existe → actualizar
+        anime_existente.set_puntuacion(nueva_puntuacion)
+        print(f"✅ Puntuación actualizada para {anime_existente.get_nombre()}.")
+    else:
+        # Si no existe → añadir
+        anime_info.set_puntuacion(nueva_puntuacion)
+        animes_usuario.append(anime_info)
+        print(f"{anime_info.get_nombre()} añadido a tus animes valorados.")
+
+    try:
+        # Leer todas las filas
+        with RATINGS_FILE.open("r", newline="", encoding="utf-8") as f:
+            reader = list(csv.DictReader(f))
+
+        actualizado = False
+        for row in reader:
+            if int(row["user_id"]) == user.get_id() and int(row["anime_id"]) == anime_id:
+                row["rating"] = str(nueva_puntuacion)
+                actualizado = True
+                break
+
+        # Si no existía, añadirlo
+        if not actualizado:
+            reader.append({
+                "user_id": str(user.get_id()),
+                "anime_id": str(anime_id),
+                "rating": str(nueva_puntuacion)
+            })
+
+        # Sobrescribir el CSV
+        with RATINGS_FILE.open("w", newline="", encoding="utf-8") as f:
+            fieldnames = ["user_id", "anime_id", "rating"]
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(reader)
+
+    except FileNotFoundError:
+        print(f"⚠️ No se encontró {RATINGS_FILE}, creando nuevo archivo...")
+        with RATINGS_FILE.open("w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=["user_id", "anime_id", "rating"])
+            writer.writeheader()
+            writer.writerow({
+                "user_id": str(user.get_id()),
+                "anime_id": str(anime_id),
+                "rating": str(nueva_puntuacion)
+            })
+    except Exception as e:
+        print(f" Error al actualizar ratings.csv: {e}")
+        return
 
 
 def mostrar_animes(user):
