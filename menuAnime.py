@@ -67,7 +67,7 @@ def valorar_anime(user):
     if anime_existente:
         # Si ya existe → actualizar
         anime_existente.set_puntuacion(nueva_puntuacion)
-        print(f"✅ Puntuación actualizada para {anime_existente.get_nombre()}.")
+        print(f"Puntuación actualizada para {anime_existente.get_nombre()}.")
     else:
         # Si no existe → añadir
         anime_info.set_puntuacion(nueva_puntuacion)
@@ -102,7 +102,7 @@ def valorar_anime(user):
             writer.writerows(reader)
 
     except FileNotFoundError:
-        print(f"⚠️ No se encontró {RATINGS_FILE}, creando nuevo archivo...")
+        print(f"No se encontró {RATINGS_FILE}, creando nuevo archivo...")
         with RATINGS_FILE.open("w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=["user_id", "anime_id", "rating"])
             writer.writeheader()
@@ -141,7 +141,7 @@ def todos_animes():
                     animes_por_letra[letra] = []
                 animes_por_letra[letra].append(anime)
     except FileNotFoundError:
-        print(f"❌ No se encontró el archivo: {ANIME_FILE}")
+        print(f"No se encontró el archivo: {ANIME_FILE}")
         return
 
     letras_disponibles = sorted(animes_por_letra.keys())
