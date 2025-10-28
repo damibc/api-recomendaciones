@@ -2,9 +2,8 @@ import csv
 from pathlib import Path
 from Animes import Anime
 from anime_api import recommend
-from anime_api import train
-from anime_api import version
 import utils
+import json
 
 DATA_DIR = Path(__file__).resolve().parent / "data"
 ANIME_FILE = DATA_DIR / "anime.csv"
@@ -31,7 +30,22 @@ def menu(user):
         accion()
 
 def recomendar_animes(user):
-    print(recommend(user.get_id()))
+    user_id = user.get_id()
+    recomendaciones = recommend(user_id)
+
+    if not recomendaciones or not recomendaciones.get("recomendaciones"):
+        print("\nNo hay recomendaciones disponibles para este usuario.\n")
+    else:
+        print("\n" + "="*70)
+        print("RECOMENDACIONES DE ANIME PARA TI")
+        print("="*70)
+
+    nombres = recomendaciones["recomendaciones"]["name"]
+
+    for nombre in nombres.values():
+        print(f" - {nombre}")
+
+    print("="*70 + "\n")
 
 def valorar_anime(user):
     RATINGS_FILE = DATA_DIR / "ratings.csv"
