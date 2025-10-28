@@ -6,6 +6,7 @@ ratings = pd.read_csv('data/ratings.csv', sep=',')
 corrMatrix = pd.read_csv('data/corr_matrix.csv', index_col=0)
 
 def recomendar_animes(user_id, top_n=10):
+    print("hola")
     user_ratings = ratings[ratings['user_id'] == user_id]
     if user_ratings.empty:
         print(f"No se encontraron ratings para el usuario {user_id}")
@@ -34,4 +35,8 @@ def recomendar_animes(user_id, top_n=10):
     recomendaciones = pd.merge(simdf, animes, on='anime_id', how='left')
     recomendaciones.sort_values('score', ascending=False, inplace=True)
 
-    return recomendaciones[['anime_id', 'name', 'score']].head(top_n).to_dict(orient="records")
+    print(recomendaciones)
+
+    return recomendaciones[['anime_id', 'name', 'score']].head(top_n)
+
+recomendar_animes(7)

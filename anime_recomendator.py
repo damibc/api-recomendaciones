@@ -18,6 +18,3 @@ def entrenar(ratings_path='data/ratings.csv', anime_path='data/anime.csv', outpu
     except Exception as e:
         print(f"❌ Error al generar la matriz de correlación: {e}")
         return None
-    
-if __name__ == "__main__":
-    entrenar()

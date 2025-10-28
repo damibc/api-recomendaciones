@@ -31,7 +31,7 @@ def menu(user):
         accion()
 
 def recomendar_animes(user):
-    recommend(user.get_id())
+    print(recommend(user.get_id()))
 
 def valorar_anime(user):
     RATINGS_FILE = DATA_DIR / "ratings.csv"
