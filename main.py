@@ -1,10 +1,10 @@
 import csv
 from pathlib import Path
-import utils
-import menuAnime
-import menuRecomendador
-from Animes import Anime
-from Users import User
+from Front import utils
+from Front import menuAnime
+from Front import menuRecomendador
+from Front.Animes import Anime
+from Front.Users import User
 
 
 # === FUNCIONES PRINCIPALES ===

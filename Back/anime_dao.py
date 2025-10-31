@@ -1,5 +1,5 @@
-from anime_recomendator import entrenar
-from user_recomendator import recomendar_animes
+from .anime_recomendator import entrenar
+from .user_recomendator import recomendar_animes
 from pathlib import Path
 
 class AnimeDAO:

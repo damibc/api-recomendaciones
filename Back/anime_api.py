@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from anime_dao import AnimeDAO
+from .anime_dao import AnimeDAO
 
 app = FastAPI()
 dao = AnimeDAO()

@@ -1,8 +1,8 @@
 import csv
 from pathlib import Path
-from Animes import Anime
-from anime_api import recommend
-import utils
+from .Animes import Anime
+from Back.anime_api import recommend
+from . import utils
 
 # === RUTAS DE ARCHIVOS ===
 DATA_DIR = Path(__file__).resolve().parent / "data"

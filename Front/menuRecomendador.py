@@ -1,6 +1,6 @@
 from pathlib import Path
-import utils
-from anime_api import train, version
+from . import utils
+from Back.anime_api import train, version
 
 
 # === MENÚ PRINCIPAL DEL RECOMENDADOR ===
