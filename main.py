@@ -6,23 +6,28 @@ import menuRecomendador
 from Animes import Anime
 from Users import User
 
+
+# === FUNCIONES PRINCIPALES ===
+
+#Finaliza la ejecución del programa.
 def salir():
     print("Que pase una buena tarde.")
-
     exit()
 
+
+#Inicia sesión cargando los datos del usuario y sus animes valorados.
 def iniciar_sesion():
     user_id = utils.validar_numero("Introduzca su ID de usuario:\n")
+    print("CARGANDO USER...")
 
-    # Directorio base
+    # --- Directorios y rutas ---
     script_dir = Path(__file__).resolve().parent
     data_dir = script_dir / "data"
-
     ruta_ratings = data_dir / "ratings.csv"
     ruta_anime = data_dir / "anime.csv"
 
     # --- Leer ratings.csv ---
-    user_ratings = {} 
+    user_ratings = {}
     try:
         with ruta_ratings.open(newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
@@ -45,13 +50,12 @@ def iniciar_sesion():
         print("Este usuario no tiene animes registrados.")
         return User(user_id, [])
 
-    # --- Leer anime.csv---
+    # --- Leer anime.csv ---
     user_animes = []
     try:
         with ruta_anime.open(newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
-            for i, row in enumerate(reader, start=1):
-                # Validar que la fila tenga la info básica
+            for row in reader:
                 if not row or "anime_id" not in row or "name" not in row:
                     continue
 
@@ -67,7 +71,7 @@ def iniciar_sesion():
                     anime = Anime(
                         id=anime_id,
                         nombre=row.get("name", "").strip(),
-                        puntuacion=user_ratings[anime_id], 
+                        puntuacion=user_ratings[anime_id],
                         generos=generos_list
                     )
                     user_animes.append(anime)
@@ -82,6 +86,7 @@ def iniciar_sesion():
     return usuario
 
 
+# === MENÚ PRINCIPAL ===
 def menu(user):
     opciones = {
         1: lambda: menuAnime.menu(user),
@@ -91,14 +96,18 @@ def menu(user):
 
     while True:
         opcion = utils.validar_numero(
-            "Seleccione una Opcion:\n"\
-            "   1.- Gestionar Animes.\n"\
-            "   2.- Gestionar Recomendador.\n"\
+            "Seleccione una opción:\n"
+            "   1.- Gestionar Animes.\n"
+            "   2.- Gestionar Recomendador.\n"
             "   0.- Salir.\n",
-            0,len(opciones)-1)
+            0,
+            len(opciones) - 1
+        )
         accion = opciones.get(opcion)
         accion()
 
+
+# === MAIN ===
 if __name__ == "__main__":
     user = iniciar_sesion()
     menu(user)
