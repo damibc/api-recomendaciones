@@ -17,7 +17,7 @@ def salir():
 
 #Inicia sesión cargando los datos del usuario y sus animes valorados.
 def iniciar_sesion():
-    user_id = utils.validar_numero("Introduzca su ID de usuario:\n")
+    user_id = utils.validar_numero("Introduzca su ID de usuario:\n", minimo=1)
     print("CARGANDO USER...")
 
     # --- Directorios y rutas ---

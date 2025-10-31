@@ -5,7 +5,7 @@ from Back.anime_api import recommend
 from . import utils
 
 # === RUTAS DE ARCHIVOS ===
-DATA_DIR = Path(__file__).resolve().parent / "data"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 ANIME_FILE = DATA_DIR / "anime.csv"
 RATINGS_FILE = DATA_DIR / "ratings.csv"
 
