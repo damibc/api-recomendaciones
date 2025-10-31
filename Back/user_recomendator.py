@@ -1,12 +1,18 @@
 import pandas as pd
 
-a_col = ['anime_id', 'name', 'members']
-animes = pd.read_csv('data/anime.csv', sep=',', usecols=a_col)
-ratings = pd.read_csv('data/ratings.csv', sep=',')
-corrMatrix = pd.read_csv('data/corr_matrix.csv', index_col=0)
+
 
 def recomendar_animes(user_id, top_n=10):
     print("Cargando recomendaciones...")
+    try :
+        a_col = ['anime_id', 'name', 'members']
+        animes = pd.read_csv('data/anime.csv', sep=',', usecols=a_col)
+        ratings = pd.read_csv('data/ratings.csv', sep=',')
+        corrMatrix = pd.read_csv('data/corr_matrix.csv', index_col=0)
+    except FileNotFoundError:
+        print(f"Falta algún archivo de la base de datos.")
+        return
+
     ratings['anime_id'] = ratings['anime_id'].astype(int)
     corrMatrix.columns = corrMatrix.columns.astype(int)
     corrMatrix.index = corrMatrix.index.astype(int)

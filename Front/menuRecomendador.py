@@ -31,7 +31,7 @@ def menu():
 
 #Obtiene la ruta al archivo version.txt.
 def obtener_ruta_version():
-    script_dir = Path(__file__).resolve().parent
+    script_dir = Path(__file__).resolve().parent.parent
     data_dir = script_dir / "data"
     return data_dir / "version.txt"
 
