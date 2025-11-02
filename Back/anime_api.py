@@ -1,19 +1,19 @@
 from fastapi import FastAPI
-from .anime_dao import AnimeDAO
+from .anime_service import AnimeService
 
 app = FastAPI()
-dao = AnimeDAO()
+service = AnimeService()
 
 @app.get("/version")
 def version():
-    return {"version": dao.get_version()}
+    return {"version": service.get_version()}
 
 @app.post("/train")
 def train():
-    result = dao.train()
+    result = service.train()
     return {"status": result}
 
 @app.get("/recommend/{user_id}")
 def recommend(user_id):
-    recomendaciones = dao.get_recommendations(user_id)
+    recomendaciones = service.get_recommendations(user_id)
     return {"user_id": user_id, "recomendaciones": recomendaciones}
