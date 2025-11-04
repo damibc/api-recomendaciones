@@ -23,6 +23,6 @@ python Main.py
 ```
 ---
 ## 4. Información adicional
--Si no descargas la matriz de correlación, el sistema no podrá generar recomendaciones.
--La valoración de los animes se realiza mediante su ID, por lo que se recomienda consultar previamente la lista de animes -disponibles y sus respectivos IDs.
--Ten en cuenta que, debido al tamaño de los datos, el programa puede tardar algunos segundos en procesar y responder.
+- Si no descargas la matriz de correlación, el sistema no podrá generar recomendaciones.
+- La valoración de los animes se realiza mediante su ID, por lo que se recomienda consultar previamente la lista de animes disponibles y sus respectivos IDs.
+- Ten en cuenta que, debido al tamaño de los datos, el programa puede tardar algunos segundos en procesar y responder.
