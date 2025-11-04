@@ -9,6 +9,10 @@ class User():
     
     def set_id(self, id):
         self.__id = id
+#Animes
 
     def get_animes(self):
         return self.__animes
+    
+    def set_animes(self, animes):
+        self.__animes = animes
